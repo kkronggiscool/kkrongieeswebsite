@@ -1,5 +1,3 @@
-/* public/styles.css */
-
 /* General styles */
 body {
     font-family: Arial, sans-serif;
@@ -7,25 +5,112 @@ body {
     padding: 0;
     display: flex;
     height: 100vh;
+    background-color: #000; /* Black background for the entire body */
+    color: #fff; /* White text */
 }
 
 /* Sidebar styles */
 .sidebar {
-    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
     background-color: #333; /* Dark gray */
-    padding: 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.sidebar h2 {
     color: #fff;
-    font-size: 18px;
-    margin-bottom: 20px;
+    padding: 20px;
+    overflow-y: auto;
+    transform: translateX(-100%); /* Sidebar is hidden by default */
+    transition: transform 0.3s ease; /* Animation for sliding */
 }
 
+.sidebar.visible {
+    transform: translateX(0); /* Show sidebar */
+}
+
+.sidebar-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1000;
+    display: none; /* Hide by default, show on small screens */
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        transform: translateX(-100%); /* Hidden by default on small screens */
+    }
+
+    .sidebar-toggle {
+        display: block; /* Show toggle button on small screens */
+    }
+
+    .sidebar.visible {
+        transform: translateX(0); /* Show sidebar on small screens */
+    }
+
+    .center-content {
+        margin-left: 0; /* Adjust content margin when sidebar is hidden */
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .sidebar {
+        width: 250px; /* Set default width for medium screens */
+        transform: translateX(0); /* Ensure sidebar is visible */
+    }
+
+    .sidebar-toggle {
+        display: none; /* Hide the toggle button on medium screens */
+    }
+
+    .center-content {
+        margin-left: 270px; /* Adjust for sidebar width */
+    }
+}
+
+@media (min-width: 1025px) {
+    .sidebar {
+        width: 250px; /* Set default width for large screens */
+        transform: translateX(0); /* Ensure sidebar is visible */
+    }
+
+    .sidebar-toggle {
+        display: none; /* Hide the toggle button on large screens */
+    }
+
+    .center-content {
+        margin-left: 270px; /* Adjust for sidebar width */
+    }
+}
+
+/* Centering the content */
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    text-align: center;
+    margin-left: 270px; /* Adjust for sidebar width */
+}
+
+@media (max-width: 768px) {
+    .center-content {
+        margin-left: 0; /* Adjust for sidebar width on small screens */
+    }
+}
+
+/* Sidebar button styles */
 .sidebar-btn {
     color: #ccc;
     padding: 10px 15px;
@@ -55,35 +140,14 @@ body {
     color: #f0f0f0;
 }
 
-.sidebar-btn.active {
-    color: #ffffff; /* Brighter text for active buttons */
-}
-
 /* Main content styling */
 .main-content {
     flex: 1;
     padding: 20px;
     box-sizing: border-box;
-    color: #fff;
 }
 
-/* Dark background for the entire body */
-.dark-bg {
-    background-color: #000; /* Black */
-    color: #fff; /* White text */
-}
-
-/* Centering the content */
-.center-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
-    text-align: center;
-}
-
-/* Animated gradient text for 'kkrongg' */
+/* Gradient text animation */
 .gradient-text {
     background: linear-gradient(270deg, #3498db, #e74c3c, #2ecc71, #f1c40f);
     background-size: 400% 400%;
@@ -92,7 +156,6 @@ body {
     animation: gradient 3s ease infinite;
 }
 
-/* Gradient animation */
 @keyframes gradient {
     0% {
         background-position: 0% 50%;
@@ -111,8 +174,9 @@ h1 {
 }
 
 p {
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 18px;
+    line-height: 1.8;
+    margin-top: 10px;
 }
 
 a {
@@ -124,66 +188,12 @@ a:hover {
     text-decoration: underline;
 }
 
-/* public/styles.css */
-
-/* Other styles remain the same */
-
-/* Centering the content */
-.center-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
-    text-align: center;
+/* Additional text styling */
+.additional-text {
+    font-size: 16px;
+    color: #ccc; /* Gray color */
+    margin-top: 10px;
 }
-
-/* Gradient text for 'kkrongg' */
-.gradient-text {
-    background: linear-gradient(270deg, #3498db, #e74c3c, #2ecc71, #f1c40f);
-    background-size: 400% 400%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradient 3s ease infinite;
-}
-
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
-}
-
-p {
-    font-size: 18px;
-    line-height: 1.8;
-    margin-top: 20px;
-}
-
-.about-link {
-    color: #3498db; /* Blue color for the link */
-    font-weight: bold;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.about-link:hover {
-    color: #f1c40f; /* Change color on hover */
-}
-
-/* public/styles.css */
-
-/* Other styles remain the same */
 
 /* Small gray text */
 .small-text {
@@ -192,26 +202,6 @@ p {
     margin-top: 10px;
 }
 
-/* public/styles.css */
-
-/* Other styles remain the same */
-
-/* Gradient text for the about page */
-.gradient-text {
-    background: linear-gradient(270deg, #3498db, #e74c3c, #2ecc71, #f1c40f);
-    background-size: 400% 400%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradient 3s ease infinite;
-}
-
-/* Additional text styling */
-.additional-text {
-    font-size: 16px;
-    color: #ccc; /* Gray color */
-    margin-top: 10px;
-}
-
 /* Social links styling */
 .socials {
     margin-top: 30px;
@@ -232,12 +222,6 @@ p {
 
 .social-link:hover {
     color: #f1c40f; /* Change color on hover */
-}
-
-p {
-    font-size: 18px;
-    line-height: 1.8;
-    margin-top: 10px;
 }
 
 strong {
@@ -246,294 +230,4 @@ strong {
 
 .bold-text {
     font-weight: bold;
-}
-
-/* Gradient text for the about page */
-.gradient-text {
-    background: linear-gradient(270deg, #3498db, #e74c3c, #2ecc71, #f1c40f);
-    background-size: 400% 400%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradient 3s ease infinite;
-}
-
-/* Additional text styling */
-.additional-text {
-    font-size: 16px;
-    color: #ccc; /* Gray color */
-    margin-top: 10px;
-}
-
-/* Social links styling */
-.socials {
-    margin-top: 30px;
-    text-align: center;
-}
-
-.socials h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-}
-
-.social-link {
-    color: #3498db; /* Blue color for links */
-    font-weight: bold;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.social-link:hover {
-    color: #f1c40f; /* Change color on hover */
-}
-
-p {
-    font-size: 18px;
-    line-height: 1.8;
-    margin-top: 10px;
-}
-
-strong {
-    font-weight: bold;
-}
-
-/* public/styles.css */
-
-/* Existing styles... */
-
-/* Sidebar toggle button */
-.sidebar-toggle {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    font-size: 24px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 1000;
-    display: none; /* Hide by default, show on small screens */
-}
-
-/* Sidebar styling */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    overflow-y: auto;
-    transition: transform 0.3s ease;
-    transform: translateX(0); /* Sidebar is visible */
-}
-
-/* Hide sidebar when toggled */
-.sidebar.hidden {
-    transform: translateX(-100%);
-}
-
-/* Media query for small screens */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        transform: translateX(-100%);
-    }
-
-    .sidebar-toggle {
-        display: block;
-    }
-
-    .sidebar.visible {
-        transform: translateX(0);
-    }
-}
-
-.center-content {
-    margin-left: 270px; /* Adjust for sidebar width */
-}
-
-/* Add gap if sidebar is hidden on small screens */
-@media (max-width: 768px) {
-    .center-content {
-        margin-left: 0;
-    }
-}
-
-/* public/styles.css */
-
-/* Existing styles... */
-
-/* Sidebar toggle button */
-.sidebar-toggle {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    font-size: 24px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 1000;
-    display: none; /* Hide by default, show on small screens */
-}
-
-/* Sidebar styling */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    overflow-y: auto;
-    transform: translateX(-100%); /* Sidebar is hidden by default */
-    transition: transform 0.3s ease; /* Animation for sliding */
-}
-
-/* Show sidebar */
-.sidebar.visible {
-    transform: translateX(0);
-}
-
-/* Hide sidebar when toggled */
-.sidebar.hidden {
-    transform: translateX(-100%);
-}
-
-/* Media query for small screens */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-    }
-
-    .sidebar-toggle {
-        display: block;
-    }
-
-    .sidebar.visible {
-        transform: translateX(0);
-    }
-
-    .sidebar.hidden {
-        transform: translateX(-100%);
-    }
-
-    .center-content {
-        margin-left: 0; /* Adjust content margin when sidebar is hidden */
-    }
-}
-
-.center-content {
-    margin-left: 270px; /* Adjust for sidebar width */
-}
-
-/* Add gap if sidebar is hidden on small screens */
-@media (max-width: 768px) {
-    .center-content {
-        margin-left: 0;
-    }
-}
-
-/* public/styles.css */
-
-/* Sidebar toggle button */
-.sidebar-toggle {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    font-size: 24px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 1000;
-    display: none; /* Hide by default, show on small screens */
-}
-
-/* Sidebar styling */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    overflow-y: auto;
-    transform: translateX(-100%); /* Sidebar is hidden by default */
-    transition: transform 0.3s ease; /* Animation for sliding */
-}
-
-/* Show sidebar */
-.sidebar.visible {
-    transform: translateX(0);
-}
-
-/* Media query for small screens */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-    }
-
-    .sidebar-toggle {
-        display: block; /* Show the toggle button on small screens */
-    }
-
-    .sidebar.visible {
-        transform: translateX(0);
-    }
-
-    .sidebar.hidden {
-        transform: translateX(-100%);
-    }
-
-    .center-content {
-        margin-left: 0; /* Adjust content margin when sidebar is hidden */
-    }
-}
-
-/* Sidebar visibility for medium screens or specific zoom levels */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .sidebar {
-        width: 250px; /* Set default width */
-        transform: translateX(0); /* Ensure sidebar is visible */
-    }
-
-    .sidebar-toggle {
-        display: none; /* Hide the toggle button on medium screens */
-    }
-
-    .center-content {
-        margin-left: 270px; /* Adjust for sidebar width */
-    }
-}
-
-/* Large screens */
-@media (min-width: 1025px) {
-    .sidebar {
-        width: 250px; /* Set default width */
-        transform: translateX(0); /* Ensure sidebar is visible */
-    }
-
-    .sidebar-toggle {
-        display: none; /* Hide the toggle button on large screens */
-    }
-
-    .center-content {
-        margin-left: 270px; /* Adjust for sidebar width */
-    }
 }
